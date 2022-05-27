@@ -27,30 +27,34 @@
         return head;
     }
     let list=createList([1,2,3,4,5]);
-    //console.log(list);
+    console.log('创建链表',list);
 
     //反转链表
-    function reverseList(head){
+
+    function reverseList(list){
+        // 直接修改传入方法的参数不好，所以用了另外一个值临时存储
+        let head = list;
         //1、遍历链表，把链表里面的每个节点的值都拿下来，存在数组里面
         //（在这里我们存的节点的值，而不是存的整个节点，这样是可以节约内存的）
         let arr=[];//arr用于存储链表的节点的值
         let p=head;//p用于遍历链表
+
         while(p){
             arr.push(p.val);
             p=p.next;
         }
-
         //2、再次遍历链表，将数组里面的值倒序的赋值给每一个节点的val域就实现了链表的反转
         //（我们没有考虑新建一个链表，而是用了原来的链表，可以节约创建新链表的时间和内存）
         p=head;
         while(p){
             p.val=arr.pop();
             p=p.next;
+
         }
         return head;
     }
 
-    console.log(reverseList(list));
+    console.log('反转结果',reverseList(list));
 
 
 </script>
