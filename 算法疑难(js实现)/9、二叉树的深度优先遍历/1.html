@@ -85,7 +85,7 @@ c、访问根节点（得到节点的值）
     }
     let levelOrderArr=['a','b','c','d','#','#','e','#','f','#','#','#','#'];
     let tree=createTree_levelOrder(levelOrderArr);
-    console.log(tree);
+    console.log('对应的二叉树',tree);
 
     // //1、先序遍历二叉树
     // function preOrderTraversal(tree,ans){
@@ -143,7 +143,58 @@ c、访问根节点（得到节点的值）
     }
     let ans=[];
     postOrderTraversal(tree,ans);
-    console.log(ans);
+    console.log('后序遍历1',ans);
+
+    // leetcode的做法：https://leetcode.cn/problems/binary-tree-postorder-traversal/solution/
+
+    //做法一：迭代
+    // var postorderTraversal = function(root, res = []) {
+    //     const stack = [];
+    //     if (root) stack.push(root);
+    //     while(stack.length) {
+    //         const node = stack.pop();
+    //         if(!node) {
+    //             res.push(stack.pop().val);
+    //             continue;
+    //         }
+    //         stack.push(node); // 中
+    //         stack.push(null);
+    //         if (node.right) stack.push(node.right); // 右
+    //         if (node.left) stack.push(node.left); // 左
+    //     };
+    //     return res;
+    // };
+    //
+    // let arr=[];
+    // postorderTraversal(tree,arr);
+    // console.log('后序遍历2',arr);
+
+    //做法二：递归
+    // var postorderTraversal = function(root) {
+    //     let res = [];
+    //     const order = (root)=>{
+    //         if (!root) return res;
+    //         order(root.left);
+    //         order(root.right);
+    //         res.push(root.val)
+    //     }
+    //     order(root)
+    //     return res;
+    // };
+    //
+    // console.log('后序遍历3',postorderTraversal(tree));
+
+    var postorderTraversal = function(root, res = []) {
+        if (!root) return res;
+        postorderTraversal(root.left, res)
+        postorderTraversal(root.right, res)
+        res.push(root.val);
+        return res;
+    };
+
+    let list=[];
+    postorderTraversal(tree,list);
+    console.log('后序遍历3',list);
 
 </script>
 </body>
